@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background: #1f2937;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin: 0 0 20px;
+    font-size: 22px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+.sidebar ul li {
+    margin-bottom: 15px 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.sidebar ul li a:hover {
+    color: #60a5fa
+}
+
+.logout {
+    color: #ff5555
+}
+
+.content {
+    margin-left: 260px;
+    padding: 20px;
+}
+
+/* Button */
+.btn {
+    background: #2563eb;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    
+}
+
+.btn:hover {
+    background: #1e40af;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white
+}
+
+.table th, .table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    
+}
+
+.table th {
+    background: #f3f4f6;
+    
+}
+
+/* Forms */
+form {
+    background: white;
+    padding: 20px;
+    max-width: 450px;
+}
+
+form input,
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Dashboard Cards */
+.cards {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    width: 200px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+/*Login Page */
+.login-bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #e5e7eb;
+}
+
+.login-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    text-align: center;
+    width: 300px;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+}
