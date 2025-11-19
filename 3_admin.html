@@ -40,42 +40,37 @@
     <!--Center main-->
     <div class="main-content">
         <div class="card_2">
-        <form class="card" id="registration-form">
-            <div class="form-group">
-                <label>Name :</label>
-                <input type="text" placeholder="Enter Full Name" required>
-            </div>
+        <form class="card" id="registration-form" method="POST" action="user_insert.php">
 
             <div class="form-group">
+                <label>Name :</label>
+                <input type="text" placeholder="Enter Full Name" name="name" required>
+            </div>
+            <div class="form-group">
                 <label>Meter Number :</label>
-                <input type="text" placeholder="Enter Meter Number" required>
+                <input type="text" name="meter_number" placeholder="Enter Meter Number" required>
             </div>
 
             <div class="form-group">
                 <label>Address :</label>
-                <input type="text" placeholder="Enter Address" required>
-            </div>
+                <input type="text" name="address" placeholder="Enter Address" required>
+                </div>
 
             <div class="form-group">
                 <label>NIC :</label>
-                <input type="text" placeholder="Enter NIC" required>
+                <input type="text" name="nic" placeholder="Enter NIC" required>
             </div>
 
             <div class="form-group">
                 <label>Telephone Number :</label>
-                <input type="number" placeholder="Enter Phone Number" required>
+                <input type="number" name="phone" placeholder="Enter Phone Number" required>
             </div>
-            
-            <div id="success-message" class="success-message" style="display: none;"> <!--Registration success msg-->
+
+            <div id="success-message" class="success-message" style="display: none;">
                 Registration successful!
             </div>
-           
-            <button class="show-btn" type="submit">SUBMIT DATA</button> 
 
+            <button class="show-btn" type="submit">SUBMIT DATA</button>
+                
         </form>
-        </div>
-    </div>
-
-    <script src="admin_script.js"></script>
-</body>
-</html>
+            

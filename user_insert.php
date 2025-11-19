@@ -1,7 +1,7 @@
 <?php 
 header('Content-Type: application/json; charset=utf-8');
 
-require_once 'db_connect.php';
+include("db_connect.php");
 
 function post($key){
     return isset($_POST[$key]) ? trim($_POST[$key]) : null;
@@ -12,7 +12,7 @@ $name = post('name');
 $meter_number = post('meter_number');
 $address = post('address');
 $phone = post('phone');
-$email = post('email');
+$nic = post('nic');
 
 $errors = [];
 if (!$name) $errors[] = 'Name is required.';
@@ -24,26 +24,30 @@ if (!empty($errors)) {
     exit();
 }
 
-try {
-    $sql = "INSERT INTO users (name, meter_number, address, nic, phone) 
-            VALUES (:name, :meter_number, :address, :nic, :phone)
-            ON DUPLICATE KEY UPDATE
-            name = VALUES(name),
-            address = VALUES(address),
-            phone = VALUES(phone),
-            created_at = NOW()";
+$sql = "IF EXISTS (SELECT 1 FROM users WHERE meter_number = ?)
+        BEGIN
+            UPDATE users
+            SET name = ?, address = ?, phone = ?, nic = ?
+            WHERE meter_number = ?
+        END
+        ELSE
+        BEGIN
+            INSERT INTO users (name, meter_number, address, phone, nic)
+            VALUES (?, ?, ?, ?, ?)
+        END";
 
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([
-        ':name' => $name,
-        ':meter_number' => $meter_number,
-        ':address' => $address,
-        ':nic' => $nic,
-        ':phone' => $phone
-    ]);
+        $params = [
+            $meter_number,
+            $name, $address, $nic, $phone,
+            $meter_number,
+            $name, $meter_number, $address, $phone, $nic
+        ];
 
-    echo json_encode(['success' => true, 'message' => 'User inserted/updated successfully.']);
-} catch (PDOException $e) {
-    http_response_code(500);
-    echo json_encode(['success' => false, 'error' => 'Database error', 'details' => $e->getMessage()]);
-}
+        $stmt = sqlsrv_query($conn, $sql, $params);
+
+        if ($stmt) {
+            echo json_encode(['success' => true, 'message' => 'User inserted/updated successfully.']);
+        } else {
+            
+            echo json_encode(['success' => false, 'errors' => 'Database error', 'details' => sqlsrv_errors()]);
+        }
