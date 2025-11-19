@@ -19,19 +19,33 @@
        const message = document.getElementById('success-message');
 
     if (form && message) {
-    form.addEventListener('submit', function(event) {
-        // Prevents the page from reloading
-        event.preventDefault();
-        
-        // Show the success message
-        message.style.display = 'block';
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevent the default form submission
 
-        // Clear the form fields
-        form.reset(); 
 
-        //  Hide the message again after 4 seconds
-        setTimeout(() => {
-            message.style.display = 'none';
-        }, 4000); 
+        let formData = new FormData(form);
+
+        let response = await fetch('user_insert.php', {
+            method: "POST",
+            body: formData
+        });
+
+        let result = await response.json();
+
+        if (result.success) {
+            message.style.display = 'block';
+            form.reset();
+
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 4000);
+        } else {
+            alert(result.error.join('\n'));
+        }
     });
 }
+        
+
+
+        
+    
